@@ -12,13 +12,20 @@ contract PinataHub {
   constructor() public {
         
   }
+
+  event ContractAddedClient(
+    address indexed _contract,
+    address indexed _client,
+    string configHash
+  );
   
-  function registerContractToClient(address _client, address _contract) public returns (bool) {
+  function registerContractToClient(address _client, address _contract, string _configHash) public returns (bool) {
     if(clientToContractCheck[_client][_contract] == true) {
-     return false;   
+      return false;   
     }
     clientToContractCheck[_client][_contract] = true;
     clientWatchedContracts[_client].push(_contract);
+    emit ContractAddedClient(_contract, _client, _configHash);
     return true;
   }
   
