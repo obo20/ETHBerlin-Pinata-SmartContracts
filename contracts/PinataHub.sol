@@ -20,9 +20,6 @@ contract PinataHub {
   );
   
   function registerContractToClient(address _client, address _contract, string _configHash) public returns (bool) {
-    if(clientToContractCheck[_client][_contract] == true) {
-      return false;   
-    }
     clientToContractCheck[_client][_contract] = true;
     clientWatchedContracts[_client].push(_contract);
     emit ContractAddedClient(_contract, _client, _configHash);
